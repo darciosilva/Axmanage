@@ -1,0 +1,6 @@
+{
+  "name": "S23 Ultra & AxManager Suite",
+  "description": "Auditor de scripts de customização, otimização de VRR, debloat seguro e simulação ADB/Shizuku sem root para Galaxy S23 Ultra e AxManager.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
