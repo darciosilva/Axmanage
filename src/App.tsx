@@ -3,6 +3,7 @@ import TweakCatalog from "./components/TweakCatalog";
 import ScriptAuditor from "./components/ScriptAuditor";
 import TerminalSimulator from "./components/TerminalSimulator";
 import ScreenProtectionWidget from "./components/ScreenProtectionWidget";
+import ZipGenerator from "./components/ZipGenerator";
 import { motion } from "motion/react";
 import {
   Smartphone,
@@ -18,7 +19,7 @@ import {
 } from "lucide-react";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<"auditor" | "tweaks">("auditor");
+  const [activeTab, setActiveTab] = useState<"auditor" | "tweaks" | "zip_generator">("auditor");
   const [terminalCommand, setTerminalCommand] = useState<string | null>(null);
 
   // Stats dynamically simulated
@@ -131,26 +132,50 @@ export default function App() {
             <Cpu className="w-4 h-4" />
             Catálogo de Ajustes S23
           </button>
+          <button
+            onClick={() => setActiveTab("zip_generator")}
+            className={`px-6 py-3.5 text-xs uppercase tracking-widest font-semibold border-b-2 transition-all cursor-pointer flex items-center gap-2 ${
+              activeTab === "zip_generator"
+                ? "border-blue-600 text-blue-400"
+                : "border-transparent text-zinc-500 hover:text-zinc-300"
+            }`}
+          >
+            <ShieldCheck className="w-4 h-4" />
+            Gerador de Plugin ZIP
+          </button>
         </div>
 
         {/* Workspace Layout: Left Content, Right Live Terminal */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8 space-y-6">
-            {activeTab === "auditor" ? (
+            {activeTab === "auditor" && (
               <motion.div
+                key="auditor"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
               >
                 <ScriptAuditor onSendToTerminal={handleSendToTerminal} />
               </motion.div>
-            ) : (
+            )}
+            {activeTab === "tweaks" && (
               <motion.div
+                key="tweaks"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
               >
                 <TweakCatalog onSendToTerminal={handleSendToTerminal} />
+              </motion.div>
+            )}
+            {activeTab === "zip_generator" && (
+              <motion.div
+                key="zip_generator"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ZipGenerator />
               </motion.div>
             )}
 
